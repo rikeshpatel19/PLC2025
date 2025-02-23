@@ -9,6 +9,10 @@ main =
     error <- getElement "error"
     putStrLn (show error ++ " results in: " ++ show (error2Result error))
     
+    putStrLn ("known results = " ++ show allResults)
+    result <- getElement "result"
+    putStrLn (show result ++ " results from: " ++ show (result2Error result))
+
 initialiseIO =
     do
     hSetBuffering stdout NoBuffering
@@ -30,10 +34,18 @@ data Result = Zero | Infinity | ABitDifferent | VeryDifferent
 allErrors :: [Error] -- ie it is a list of PL elements
 allErrors = [minBound .. maxBound]
 
+allResults :: [Result] -- ie it is a list of PL elements
+allResults = [minBound .. maxBound]
+
 error2Result FP_Rounding = ABitDifferent
 error2Result FP_Overflow = Infinity
 error2Result FP_Underflow = Zero
 error2Result Int_Overflow = VeryDifferent
+
+result2Error FP_Rounding = ABitDifferent
+result2Error FP_Overflow = Infinity
+result2Error FP_Underflow = Zero
+result2Error Int_Overflow = VeryDifferent
 
 -- The code below should not be changed and does not need to be fully understood.
 
@@ -64,3 +76,4 @@ parseElement line =
         ((e,_) : _) -> -- found at least one interpretation, call it "e"
             Just e -- type of e is derived from context
                    -- where getElement is used
+
