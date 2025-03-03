@@ -103,11 +103,11 @@ public class PlaylistColls {
 
         List<Float> shortItemLengths1 = new ArrayList<>();
         // TASK 6.2(b)...
-
-
-
-
-
+        for (Item item : shortItemLengths1) {
+            if (item.length_secs < 20) {
+                shortItemLengths1.add(item.length_secs);
+            }
+        }
 
         System.out.printf("shortItemLengths1 = %s\n", shortItemLengths1);
 
